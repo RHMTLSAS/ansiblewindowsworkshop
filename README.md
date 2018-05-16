@@ -3,7 +3,7 @@ Ansible Windows Workshop
 
 # Instructions pour se connecter à Azure 
 Pre-requis: 
-- Une subscription Azure (portal.azure.com), par example "Pay-as-you-go", capable de consommer des instances comme RHEL, ne pas incluses dans le "free trial"
+- Une subscription Azure (portal.azure.com), par exemple "Pay-as-you-go", capable de consommer des instances comme RHEL, ne pas incluses dans le "free trial"
 - Configurer accès a notre compte via API, en ajoutant une "webapp" avec des droits d'écriture tel que expliqué ici https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal
 
 ## Comment récupérer les ID de notre compte azure:
@@ -24,10 +24,10 @@ Téléchargez la dernière version du Azure CLI universel (Windows, Linux et Mac
 https://docs.microsoft.com/fr-FR/cli/azure/install-azure-cli?view=azure-cli-latest
 
 Ensuite, connectez-vous 
-# az login
+`# az login`
 
 Il va vous demander d'ouvrir un lien internet avec le meme navigateur ou vous avez votre session ouverte (portal.azure.com). 
-# To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code AC5LZ11DS to authenticate.
+`# To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code AC5LZ11DS to authenticate.`
 
 Le CLI va s'authentifier automatiquement et enregistrer en mémoire le token de login pour quelques jours, mais si vous voulez vous déconnecter du CLI vous pouvez toujours faire "az logout"
 
@@ -36,6 +36,7 @@ Pré-requis: la derniere version de Ansible 2.x doit etre installée
 Vous pouvez suivre la guide dans http://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
 
 D'abord on va garder nos 4 ID's dans un fichier de texte, tel que décrit ici http://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html#storing-in-a-file
+
 Par example,  $HOME/.azure/credentials (il faut le protéger avec "chmod 600  $HOME/.azure/credentials")
 `# vi $HOME/.azure/credentials
 AZURE_CLIENT_ID=11111111-ff8c-4e1e-ab94-517778d11111
