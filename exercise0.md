@@ -12,7 +12,8 @@ Objectifs: Ajouter votre VM Windows 2016 au inventaire tower
 Dans ce nouveau menu, remplissez les details de la VM: 
 - **Hostname**: on n'a pas de DNS mais on va ajouter ici le nom "MaVMWindows2016"
 - Dans le box **Variables**, au-dessous de "---" on ajoute des variables comme suit 
-```---
+```
+---
 ansible_host: 40.86.222.127
 ansible_user" MON_USERNAME
 ansible_port: 5985
@@ -49,3 +50,41 @@ MaVMWindows2016 | SUCCESS => {
 
 
 ## Execution de playbook de test
+Maintenant on va importer notre premier playbook depuis le depot du workshop https://github.com/RHMTLSAS/ansiblewindowsworkshop/
+On va aller au onglet **Projects** puis on clique sur **+ADD**
+- dans **Name** on écrit "Ansible Windows Workshop"
+- **Organization**: "default"
+- **SCM Type** git
+- **SCM URL** https://github.com/RHMTLSAS/ansiblewindowsworkshop/
+- On active *Update on Launch*
+- puis **Save**
+
+Ensuite on va configurer une Job Template, c'est là qu'on va choisir quel **Playbook** va s'executer sur quel **Inventory** avec les **Credentials** nécessaires. 
+Dans ce cas, on va executer le playbook suivant (https://github.com/RHMTLSAS/ansiblewindowsworkshop/blob/master/test_playbooks/filetest.yml), qui va simplemen créer un fichier "hello world" dans C:/temp/file
+On va allors sur l'onglet **Templates** puis **+ADD** et **Job Template**
+- dans **Name** on écrit *"Create file in temp folder in Windows"*
+- **Job Type**: Run
+- **Inventory**: "MesVMs"
+- **Project**: *Ansible Windows Workshop* (le nom du Projet avec le depot Git du workshop)
+- **Playbook**: dépliez la liste et sélectionnez *test_playbook/filetest.yml*
+- **Credential**: "Mon Mot De Passe Windows 2016"
+- Laissez le reste par défault, puis cliquez sur **Save**
+
+Alors on est pret pour executer notre premier playbook template. On va dans l'onglet **Templates**, et on va chercher dans la list le job template *"Create file in temp folder in Windows"*.
+On va éxecuter la template immediatement via le icon du "rocket" à droite.
+Si tout marche bien, on devrait voir la correcte éxécution du playbook avec un message comme celui-ci:
+```
+
+PLAY [test windowsRM and win2016] **********************************************
+18:39:36
+TASK [Gathering Facts] *********************************************************
+18:39:36
+ok: [MaVMWindows2016]
+TASK [Put a file] **************************************************************
+18:39:42
+ok: [MaVMWindows2016]
+PLAY RECAP *********************************************************************
+18:39:46
+MaVMWindows2016            : ok=2    changed=0    unreachable=0    failed=0   
+
+```
