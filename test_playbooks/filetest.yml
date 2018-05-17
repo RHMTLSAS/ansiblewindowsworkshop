@@ -1,0 +1,14 @@
+---
+- name: test windowsRM and win2016
+  hosts: all
+  tasks:
+    - name: Put a file
+      win_dsc:
+        resource_name: File
+        DestinationPath: C:\temp\file
+        Contents: |
+            Hello
+            World
+        Ensure: Present
+        Type: File
+
