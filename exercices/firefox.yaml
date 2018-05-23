@@ -1,0 +1,10 @@
+---
+- name: Installation Firefox avec Chocolatey
+  hosts: all
+  gather_facts: no 
+
+  tasks:
+    - name: Installation de Firefox
+      win_chocolatey:
+        name: firefox
+        state: present

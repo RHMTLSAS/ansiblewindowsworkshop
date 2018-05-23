@@ -1,0 +1,44 @@
+---
+- name: Configuration d'un serveur web
+  hosts: all
+  gather_facts: no 
+  vars: 
+    ansible_site_path: "C:\\inetpub\\wwwroot\\ansibletest"
+    default_iis_path: "C:\\inetpub\\wwwroot\\index.html" 
+  tasks:
+    - name: Installation de IIS
+      win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Copie ficher index.html
+      win_copy:
+        src: index.html 
+        dest: "{{ default_iis_path }}"    
+
+    - name: Creation du repertoire pour un second site web
+      win_file: 
+        path: "{{ ansible_site_path }}" 
+        state: directory
+
+    - name: Creation du second site web
+      win_iis_website:
+        name: "Ansible test site"
+        state: started 
+        port: 8080
+        physical_path: "{{ ansible_site_path }}"
+
+    - name: Create fichier index du second site web
+      win_copy:
+        src: ansible.html 
+        dest: "{{ ansible_site_path }}\\index.html" 
+
+    - name: Ouvrir le port firewall pour second site web    
+      win_firewall_rule:
+        name: Ansible8080
+        enable: yes
+        state: present
+        localport: 8080
+        action: Allow
+        direction: In
+        protocol: Tcp
