@@ -14,13 +14,12 @@ Dans ce nouveau menu *Create Hosts*, remplissez les details de la VM:
 - Dans le box **Variables**, au-dessous de "---" on ajoute des variables comme suit 
 ```
 ---
-ansible_host: MON_IP_PUBLIQUE_VM
-ansible_user: MON_USERNAME
+ansible_host: 192.168.33.50
+ansible_user: ansible
 ansible_port: 5985
 ansible_connection: winrm
 ansible_winrm_transport: basic
 ```
-- ** Ne pas oublier d'utiliser votre IP_PUBLIQUE et votre USERNAME windows **
 - Si l'on a oublié certains details de la VM on peut toujours voir le "Automation Script" qui a toutes les variables qu'on a utilisé pour créer notre VM dans Azure.
 - On sauvegarde le Host avec **Save**
 
@@ -30,8 +29,8 @@ Ensuite, cliquez sur **+ADD** et remplissez les information des la nouvelle "cre
 - **Name**: "Mon Mot De Passe Windows 2016"
 - **Credential Type**: cliquez sur la "loupe", puis sélectionner "Machine"
 - **Organization**: "default"
-- **Username**: "MON_USERNAME", celui que vous avez configuré au demarrage de la VM dans azure
-- **Password**: Le password que vous avez configuré au demarrage de la VM dans azure
+- **Username**: "ansible", celui que vous avez configuré au demarrage de la VM dans azure
+- **Password**: Le password que vous avez configuré au demarrage de la VM dans azure, devrait etre Password1!
 Cliquez sur Save	
 
 ## Execution de commande de test
